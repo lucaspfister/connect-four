@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Board m_Board;
     [SerializeField] private SelectionManager m_SelectionManager;
+    [SerializeField] private float m_AIDelay = 1f;
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI m_TurnText;
     [SerializeField] private Button m_ResetButton;
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
                 m_CurrentState = GameState.AITurn;
                 m_SelectionManager.Lock();
                 m_TurnText.text = AI_TURN;
+                StartCoroutine(AITurn());
                 break;
             case GameState.AITurn:
                 m_CurrentState = GameState.PlayerTurn;
@@ -80,5 +82,12 @@ public class GameManager : MonoBehaviour
             case Result.Draw:
                 break;
         }
+    }
+
+    private IEnumerator AITurn()
+    {
+        yield return new WaitForSeconds(m_AIDelay);
+        int index = AI.GetRandomValue(m_Board.GetAvailableColumns());
+        m_Board.AddChecker(index, false);
     }
 }

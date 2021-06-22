@@ -40,7 +40,7 @@ public class Board : MonoBehaviour
     {
         m_Slots = new Slot[BOARD_SIZE.x, BOARD_SIZE.y];
         m_ColumnCounter = new int[BOARD_SIZE.x];
-
+        
         foreach (Transform item in m_CheckerParent)
         {
             Destroy(item.gameObject);
@@ -49,7 +49,7 @@ public class Board : MonoBehaviour
 
     public bool AddChecker(int columnIndex, bool isPlayer1)
     {
-        if (columnIndex >= m_ColumnCounter.Length) return false;
+        if (m_ColumnCounter[columnIndex] >= BOARD_SIZE.y) return false;
 
         Slot slot = isPlayer1 ? Slot.Player1 : Slot.Player2;
         
@@ -73,5 +73,19 @@ public class Board : MonoBehaviour
     {
         //TODO
         return Result.None;
+    }
+
+    public List<int> GetAvailableColumns()
+    {
+        List<int> lstAvailableColumns = new List<int>();
+
+        for (int i = 0; i < m_ColumnCounter.Length; i++)
+        {
+            if (m_ColumnCounter[i] >= BOARD_SIZE.y) continue;
+
+            lstAvailableColumns.Add(i);
+        }
+
+        return lstAvailableColumns;
     }
 }
