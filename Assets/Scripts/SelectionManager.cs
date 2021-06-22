@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SelectionManager : MonoBehaviour
 {
-    [SerializeField] Image m_Arrow;
-    [SerializeField] CanvasGroup m_ColumnGroup;
+    [SerializeField] private Image m_Arrow;
+    [SerializeField] private CanvasGroup m_ColumnGroup;
 
     private Transform m_ArrowParent;
     private SelectableColumn[] m_SelectableColumns;
@@ -29,12 +29,12 @@ public class SelectionManager : MonoBehaviour
 
     public void Lock()
     {
-        m_ColumnGroup.interactable = false;
+        m_ColumnGroup.blocksRaycasts = false;
     }
 
     public void Unlock()
     {
-        m_ColumnGroup.interactable = true;
+        m_ColumnGroup.blocksRaycasts = true;
     }
 
     private void EnableArrow( Transform selectedTransform )
@@ -50,6 +50,9 @@ public class SelectionManager : MonoBehaviour
 
     private void ColumnSelected(int index)
     {
-        //TODO
+        if (GameManager.Instance.Board.AddChecker(index, true))
+        {
+            Lock();
+        }
     }
 }
