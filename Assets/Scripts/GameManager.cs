@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     {
         PlayerTurn,
         AITurn,
-        GameOver
     }
 
-    [SerializeField] private Board m_Board;
     [SerializeField] private SelectionManager m_SelectionManager;
+    [SerializeField] private Board m_Board;
+    [SerializeField] private EndPopup m_EndPopup;
     [SerializeField] private float m_AIDelay = 1f;
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI m_TurnText;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_ResetButton.onClick.AddListener(ResetGame);
+        m_EndPopup.OnClosePopup += ResetGame;
         ResetGame();
     }
 
@@ -62,27 +63,23 @@ public class GameManager : MonoBehaviour
                 m_SelectionManager.Unlock();
                 m_TurnText.text = PLAYER_TURN;
                 break;
-            case GameState.GameOver:
-                //TODO
-                break;
         }
     }
 
     public void CheckerAdded()
     {
-        switch (m_Board.CheckResult())
+        Result result = m_Board.CheckResult();
+
+        switch (result)
         {
             case Result.None:
                 NextTurn();
                 break;
             case Result.Victory:
-                Debug.Log("VICTORY");
-                break;
             case Result.Defeat:
-                Debug.Log("DEFEAT");
-                break;
             case Result.Draw:
-                Debug.Log("DRAW");
+                m_TurnText.text = string.Empty;
+                m_EndPopup.ShowPopup(result);
                 break;
         }
     }
