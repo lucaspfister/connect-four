@@ -28,5 +28,4 @@ public class SelectableColumn : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         OnPointerUpAction?.Invoke();
     }
-
 }

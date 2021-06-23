@@ -76,10 +76,13 @@ public class GameManager : MonoBehaviour
                 NextTurn();
                 break;
             case Result.Victory:
+                Debug.Log("VICTORY");
                 break;
             case Result.Defeat:
+                Debug.Log("DEFEAT");
                 break;
             case Result.Draw:
+                Debug.Log("DRAW");
                 break;
         }
     }
