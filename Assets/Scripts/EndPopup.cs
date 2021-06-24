@@ -13,8 +13,8 @@ public class EndPopup : MonoBehaviour
     private Canvas m_Canvas;
     private Animator m_Animator;
 
-    private const string VICTORY = "YOU WON!";
-    private const string DEFEAT = "AI WON";
+    private const string VICTORY = "YOU WIN!";
+    private const string DEFEAT = "YOU LOSE";
     private const string DRAW = "DRAW";
     
     public Action OnClosePopup;
