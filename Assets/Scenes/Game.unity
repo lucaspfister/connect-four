@@ -421,7 +421,8 @@ MonoBehaviour:
   m_SelectionManager: {fileID: 1711527486}
   m_Board: {fileID: 26232762}
   m_EndPopup: {fileID: 174887850}
-  m_AIDelay: 1
+  m_AIDelay: 0.5
+  m_RandomAI: 0
   m_TurnText: {fileID: 386370393}
   m_ResetButton: {fileID: 573992774}
 --- !u!4 &184175300
@@ -1033,7 +1034,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.94509804}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2190,7 +2191,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

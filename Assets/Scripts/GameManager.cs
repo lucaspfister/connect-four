@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Board m_Board;
     [SerializeField] private EndPopup m_EndPopup;
     [SerializeField] private float m_AIDelay = 1f;
+    [SerializeField] private bool m_RandomAI;
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI m_TurnText;
     [SerializeField] private Button m_ResetButton;
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(m_AIDelay);
         m_AICoroutine = null;
-        int index = AI.GetValue(m_Board);
+        int index = m_RandomAI ? AI.GetRandomValue(m_Board.GetAvailableColumns()) : AI.GetValue(m_Board);
         m_Board.AddChecker(index, false);
     }
 }
