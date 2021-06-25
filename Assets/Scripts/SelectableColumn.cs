@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 
 public class SelectableColumn : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public Action<Transform> OnPointerEnterAction;
+    public Action OnPointerEnterAction;
     public Action OnPointerExitAction;
     public Action OnPointerUpAction;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnPointerEnterAction?.Invoke(transform);
+        OnPointerEnterAction?.Invoke();
     }
 
     public void OnPointerExit(PointerEventData eventData)

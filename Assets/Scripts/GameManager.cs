@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button m_ResetButton;
 
     private GameState m_CurrentState;
+    private Coroutine m_AICoroutine;
 
     private const string PLAYER_TURN = "Your Turn";
     private const string AI_TURN = "AI's Turn";
@@ -43,6 +44,11 @@ public class GameManager : MonoBehaviour
 
     private void ResetGame()
     {
+        if (m_AICoroutine != null)
+        {
+            StopCoroutine(m_AICoroutine);
+        }
+
         m_CurrentState = GameState.AITurn;
         m_Board.Init();
         NextTurn();
@@ -56,7 +62,7 @@ public class GameManager : MonoBehaviour
                 m_CurrentState = GameState.AITurn;
                 m_SelectionManager.Lock();
                 m_TurnText.text = AI_TURN;
-                StartCoroutine(AITurn());
+                m_AICoroutine = StartCoroutine(AITurn());
                 break;
             case GameState.AITurn:
                 m_CurrentState = GameState.PlayerTurn;
@@ -87,6 +93,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator AITurn()
     {
         yield return new WaitForSeconds(m_AIDelay);
+        m_AICoroutine = null;
         int index = AI.GetValue(m_Board);
         m_Board.AddChecker(index, false);
     }

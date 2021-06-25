@@ -10,6 +10,7 @@ public class SelectionManager : MonoBehaviour
 
     private Transform m_ArrowParent;
     private SelectableColumn[] m_SelectableColumns;
+    private int m_SelectedIndex;
 
     void Start()
     {
@@ -21,9 +22,9 @@ public class SelectionManager : MonoBehaviour
         {
             int index = i;
             m_SelectableColumns[i] = m_ColumnGroup.transform.GetChild(i).GetComponent<SelectableColumn>();
-            m_SelectableColumns[i].OnPointerEnterAction += EnableArrow;
+            m_SelectableColumns[i].OnPointerEnterAction += () => EnableArrow(m_SelectableColumns[index].transform, index);
             m_SelectableColumns[i].OnPointerExitAction += DisableArrow;
-            m_SelectableColumns[i].OnPointerUpAction += () => ColumnSelected(index);
+            m_SelectableColumns[i].OnPointerUpAction += ColumnSelected;
         }
     }
 
@@ -37,8 +38,9 @@ public class SelectionManager : MonoBehaviour
         m_ColumnGroup.blocksRaycasts = true;
     }
 
-    private void EnableArrow( Transform selectedTransform )
+    private void EnableArrow( Transform selectedTransform, int columnIndex )
     {
+        m_SelectedIndex = columnIndex;
         m_ArrowParent.position = new Vector3(selectedTransform.position.x, m_ArrowParent.position.y, m_ArrowParent.position.z);
         m_Arrow.enabled = true;
     }
@@ -48,9 +50,9 @@ public class SelectionManager : MonoBehaviour
         m_Arrow.enabled = false;
     }
 
-    private void ColumnSelected(int index)
+    private void ColumnSelected()
     {
-        if (GameManager.Instance.Board.AddChecker(index, true))
+        if (GameManager.Instance.Board.AddChecker(m_SelectedIndex, true))
         {
             Lock();
         }
