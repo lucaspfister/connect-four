@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator AITurn()
     {
         yield return new WaitForSeconds(m_AIDelay);
-        int index = AI.GetRandomValue(m_Board.GetAvailableColumns());
+        int index = AI.GetValue(m_Board);
         m_Board.AddChecker(index, false);
     }
 }

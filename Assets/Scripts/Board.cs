@@ -11,15 +11,15 @@ public enum Result
     Draw
 }
 
+public enum Slot
+{
+    Empty,
+    Player1,
+    Player2
+}
+
 public class Board : MonoBehaviour
 {
-    public enum Slot
-    {
-        Empty,
-        Player1,
-        Player2
-    }
-
     [SerializeField] private RectTransform m_Checker1Prefab;
     [SerializeField] private RectTransform m_Checker2Prefab;
     [SerializeField] private Transform m_CheckerParent;
@@ -32,6 +32,9 @@ public class Board : MonoBehaviour
     private int m_CheckersCount;
 
     private readonly Vector2Int BOARD_SIZE = new Vector2Int(7, 6);
+
+    public Slot[,] Slots => m_Slots;
+    public int[] ColumnCounter => m_ColumnCounter;
 
     private void Start()
     {

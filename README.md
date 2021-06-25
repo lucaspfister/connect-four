@@ -11,13 +11,15 @@ This project was designed for mobile platforms. Build generated and tested for A
 * Button to reset the game anytime;
 * EndGame popup. Click anywhere to close it and reset the game; 
 * Complete game loop;
+* Simple AI that chooses a column based on higher score and always tries to avoid player's final movement;
 
 ## Considerations
 
+Tests were made using Debug.Log and VS debug step by step.
+
 I'm using 2 third party plugins (both are free): 
 
-	* SafeArea: it's a single script that manages mobile devices safe areas
-	* DOTween: nice plugin for animations. I use it in almost all of my projects since 2016. Very useful and productive. In this project I used it to animate the checkers
+* SafeArea: it's a single script that manages mobile devices safe areas;
+* DOTween: nice plugin for animations. I use it in almost all of my projects since 2016. Very useful and productive. In this project I used it to animate the checkers;
 
-Tests were made using Debug.Log and VS debug step by step.
 
